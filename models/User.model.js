@@ -17,7 +17,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minLength: 8
-    }
+    },
+    lisAppliance: [{
+      type:Schema.ObjectId, ref:'appliance'
+    }]
+      
+    
   },
   {
     timestamps: true,

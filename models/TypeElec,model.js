@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-
 const typesSchema = new Schema(
 
     {
@@ -8,11 +7,13 @@ const typesSchema = new Schema(
             required: true,
             unique: true,
         },
-        values: {
-            type: Number,
-            required: true,
+        consum: {
+            type: [Number],
+            required: true
         }
+    }, {
+        timestamps: true
     }
 )
-const Types = model('Type', typesSchema);
-module.exports = Types;
+const Type = model('Type', typesSchema);
+module.exports = Type;
