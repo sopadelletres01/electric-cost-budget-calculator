@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js && open localhost:3000"
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -16,7 +16,9 @@
     "hbs": "^4.2.0",
     "mongoose": "^6.4.1",
     "morgan": "^1.10.0",
-    "serve-favicon": "^2.5.0"
+    "open": "^8.4.0",
+    "serve-favicon": "^2.5.0",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.18"
