@@ -1,7 +1,7 @@
 document.addEventListener(
-  "DOMContentLoaded",
+  'DOMContentLoaded',
   () => {
-    console.log("electric-calculator JS imported successfully!");
+    console.log('electric-calculator JS imported successfully!');
   },
   false
 );
