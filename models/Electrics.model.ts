@@ -1,10 +1,13 @@
 const { Schema, model } = require('mongoose');
+//tabal de consumos de un electrodoméstico
 enum Consumptions{
-    A,"A+++" = 0.25,
-    B = 0.5,
-    C = 0.75,
-    D = 0.4,
-
+    A = -0.55,
+    B = - 0.45,
+    C = -0.30,
+    D = -0.5,
+    E = 0.5,
+    F = 0.10,
+    G = 0.20
 }
 
 const appilanceSchema = new Schema(
@@ -22,7 +25,10 @@ const appilanceSchema = new Schema(
             required: true,
         },
         consum: {
-            enum: ['A+++', 'A++', 'A+', 'A', 'B', 'C', 'D']
+            enum: [Consumptions]
+        },
+        type: {
+            type: Schema.Types.ObjectId, ref: 'Types'
         }
         // en 2021 cambio a solamente A, B, C , D
         // hasta 20221 era 'A+++', 'A++', 'A+', B, 'C', 'D'
