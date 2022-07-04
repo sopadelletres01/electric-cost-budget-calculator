@@ -8,20 +8,21 @@ const applianceSchema = new Schema(
             type:Schema.ObjectId, ref:'Type',
             required: true,
         },
-   
         consum: {
             type: Schema.ObjectId, ref: 'Consumption',
             required: true
         },
-       
         userId: {
           type:Schema.ObjectId, ref:'User'
         },
         longDuration: {
             type: Boolean,
             required: true
+        },
+        totalcost: {
+            type: Number,
+            required:false
         }
-       
     }, {
     timestamps: true
     }
