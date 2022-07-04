@@ -19,7 +19,7 @@ const applianceSchema = new Schema(
             type: Boolean,
             required: true
         },
-        totalcost: {
+        totalCost: {
             type: Number,
             required:false
         }
