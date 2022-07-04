@@ -7,7 +7,6 @@ const consumptionSchema = new Schema(
             type: String,
             required: true,
         },
-      
         value: {
             type:Number
         }
