@@ -1,6 +1,8 @@
 var validator = require('validator');
 const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
+// How many rounds should bcrypt run the salt (default [10 - 12 rounds])
+const saltRounds = 10;
 exports.signup = async (req, res, next) => {
   const { username, password } = req.body;
 
