@@ -8,7 +8,8 @@ const consumptionSchema = new Schema(
             required: true,
         },
         value: {
-            type:Number
+
+            type:[Number]
         }
     }, {
     timestamps: true
