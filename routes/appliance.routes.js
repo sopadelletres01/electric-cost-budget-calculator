@@ -4,13 +4,15 @@ const {
   createAppliance,
   findAllAppliances,
 } = require('../controllers/appliance');
-const { findConsumAndType } = require('../controllers/consum');
+const { findConsumAndTypeS,findConsumAndTypeL } = require('../controllers/consum');
 
 router.get('/create', async (req, res, next) => {
   try {
-    const consumType = await findConsumAndType();
-    console.log('consumo y tipo', consumType);
-    res.render('appliance/addAppliance', { consumType });
+    const consumTypeS = await findConsumAndTypeS();
+    const consumTypeL = await findConsumAndTypeL();
+      
+      console.log('consumo y tipo', );
+    res.render('appliance/addAppliance', { consumTypeS, consumTypeL });
   } catch (error) {
     console.log('hay un error', error);
   }
