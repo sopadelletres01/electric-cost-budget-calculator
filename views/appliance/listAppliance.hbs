@@ -1,0 +1,23 @@
+<h2> Lista de tus electrodomesticos</h2>
+<div class='appliance__list'>
+  <table>
+    <tr>
+      <th>Tipo </th>
+      <th>Consumo </th>
+      <th>Gatos Acumulado</th>
+      <th>Creación </th>
+      <th> </th>
+    </tr>
+    {{#each appliance}}
+      <tr>
+        <td>{{this.type}}</td>
+        <td>{{this.consum}}</td>
+        <td>{{this.totalCost}}</td>
+        <td>{{this.created}}</td>
+        <td>
+          icono de modificar
+        </td>
+      </tr>
+    {{/each}}
+  </table>
+</div>

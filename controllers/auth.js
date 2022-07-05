@@ -1,17 +1,18 @@
 var validator = require('validator');
 const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 // How many rounds should bcrypt run the salt (default [10 - 12 rounds])
 const saltRounds = 10;
 exports.signup = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, username, password } = req.body;
 
   if (!username) {
     return res.status(400).render('auth/signup', {
       errorMessage: 'Please provide your username.',
     });
   }
-
+  // validator
   if (password.length < 8) {
     return res.status(400).render('auth/signup', {
       errorMessage: 'Your password needs to be at least 8 characters long.',
@@ -31,7 +32,7 @@ exports.signup = async (req, res, next) => {
     */
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username }).then(found => {
+  User.findOne({ email }).then(found => {
     // If the user is found, send the message username is taken
     if (found) {
       return res.status(400).render('auth/signup', {
@@ -46,6 +47,7 @@ exports.signup = async (req, res, next) => {
       .then(hashedPassword => {
         // Create a user and save it in the database
         return User.create({
+          email,
           username,
           password: hashedPassword,
         });
@@ -75,9 +77,9 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res.status(400).render('auth/login', {
       errorMessage: 'Please provide your username.',
     });
@@ -92,7 +94,7 @@ exports.login = async (req, res, next) => {
   }
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  User.findOne({ email })
     .then(user => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {
