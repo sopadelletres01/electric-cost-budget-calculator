@@ -18,7 +18,8 @@ exports.findConsumAndTypeS = async () => {
 exports.findConsumAndTypeL = async () => {
     try {
       const consums = await Consumption.find();
-        const type = await Type.find({longDuration: true});
+        const type = await Type.findAll({ longDuration: true });
+        console.log('esto son los tipos',type)
   
       return {
         consums,
