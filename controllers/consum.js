@@ -1,11 +1,10 @@
 const Consumption = require('../models/Consumption.model');
-const Type = require('../models/TypeElec.model');
+const Type = require('../models/Type.model');
 
 exports.findConsumAndTypeS = async () => {
   try {
     const consums = await Consumption.find();
     const type = await Type.find({longDuration:false});
-
     return {
       consums,
       type,

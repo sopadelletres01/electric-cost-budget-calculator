@@ -6,7 +6,8 @@ exports.createAppliance = async (req, res, next) => {
     const { type, consum, longDuration } = req.body;
     const user = req.session.user;
     const userId = user._id;
-    await Appliance.create({ type, consum, userId, longDuration });
+    const appliance = await Appliance.create({ type, consum, userId, longDuration });
+    console.log(appliance);
     console.log('El electrodoméstico ha sido creado CORRECTAMENTE.');
     res.status(200).redirect('appliance/lisAppliance');
   } catch (err) {
