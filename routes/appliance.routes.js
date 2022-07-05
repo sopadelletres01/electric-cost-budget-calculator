@@ -11,7 +11,7 @@ router.get('/create', async (req, res, next) => {
     const consumTypeS = await findConsumAndTypeS();
     const consumTypeL = await findConsumAndTypeL();
       
-      console.log('consumo y tipo', );
+     // console.log('consumo y tipo',consumTypeS);
     res.render('appliance/addAppliance', { consumTypeS, consumTypeL });
   } catch (error) {
     console.log('hay un error', error);

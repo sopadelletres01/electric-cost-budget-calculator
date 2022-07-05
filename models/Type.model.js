@@ -10,6 +10,10 @@ const typesSchema = new Schema(
       type: [Number],
       required: true,
     },
+    longDuration: {
+      type:Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

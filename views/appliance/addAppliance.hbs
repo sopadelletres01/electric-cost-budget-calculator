@@ -1,17 +1,44 @@
+<h1>Crear Electrodoméstico</h1>
+<h2>Larga Duracion</h2>
 <form action='/appliance/create' method='POST'>
-
+  <input type="hidden" name="longDuration" value="true">
   <label for='typeAppliance'> Tipo de Electrodoméstico</label>
   <select name='type'>
     {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
-    {{#each consumType.type}}
+    {{#each consumTypeL.type}}
       <option value={{this._id}}>{{this.name}}</option>
     {{/each}}
   </select>
   <label for='typeConsum'>Categoria energetica</label>
   <select name='consum'>
     {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
-    {{#each consumType.consums}}
-      <option value={{this._is}}>{{this.name}}</option>
+    {{#each consumTypeL.consums}}
+      <option value={{this._id}}>{{this.name}}</option>
+    {{/each}}
+  </select>
+  <button type='submit'> Crear</button>
+  <button type='reset'>Borrar Datos</button>
+
+</form>
+<br>
+<hr>
+<br>
+<h2>Corta Duracion</h2>
+<form action='/appliance/create' method='POST'>
+  <input type="hidden" name="longDuration" value="false">
+
+  <label for='typeAppliance'> Tipo de Electrodoméstico</label>
+  <select name='type'>
+    {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
+    {{#each consumTypeS.type}}
+      <option value={{this._id}}>{{this.name}}</option>
+    {{/each}}
+  </select>
+  <label for='typeConsum'>Categoria energetica</label>
+  <select name='consum'>
+    {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
+    {{#each consumTypeS.consums}}
+      <option value={{this._id}}>{{this.name}}</option>
     {{/each}}
   </select>
   <button type='submit'> Crear</button>
