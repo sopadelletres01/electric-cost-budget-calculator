@@ -3,24 +3,12 @@ const {promisify} = require('util');
 const ApiService = require('../../services/electricPrice.service');
 //const { get, set } = require('../../utils/redis');
 const Redis = require('ioredis');
-const redisClient = new Redis({
+/* const redisClient = new Redis({
   host: '127.0.0.1',
   port: 6379,
-});
-
-/* const redisClient = new Redis({
-  host: process.env.REDIS_URL,
-  port: process.env.PORT_REDIS_CLOUD,
-  username: "default",
-  password: process.env.REDIS_PASSWORD,
-  family : '6'
 }); */
 
-/* const redisClient = new Redis({
-  host:"redis-10582.c135.eu-central-1-1.ec2.cloud.redislabs.com:10582",
-  username:"Cram",
-  password:"Cram123."
-}); */
+const redisClient = new Redis(`redis://${process.env.REDIS_USER}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_URL}:${process.env.REDIS_CLOUD_PORT}/0`);
 
 const get = async (key) => {
   
@@ -35,22 +23,6 @@ const set = async (key,data) => {
 
 }
 
-
-
-const redisDemo = async (data) => {
-  // Connect to Redis at 127.0.0.1, port 6379.
-  console.log(typeof JSON.stringify(data));
-
-  // Set key "prices" to have value "Simon Prickett".
-  await redisClient.set('prices', JSON.stringify(data));
-
-  // Get the value held at key "prices" and log it.
-  const value = await redisClient.get('prices');
-  console.log(value);
-
-  // Disconnect from Redis.
-  redisClient.quit();
-};
 
 router.get('/', async (req, res) => {
   try {
