@@ -8,6 +8,20 @@ const redisClient = new Redis({
   port: 6379,
 });
 
+/* const redisClient = new Redis({
+  host: process.env.REDIS_URL,
+  port: process.env.PORT_REDIS_CLOUD,
+  username: "default",
+  password: process.env.REDIS_PASSWORD,
+  family : '6'
+}); */
+
+/* const redisClient = new Redis({
+  host:"redis-10582.c135.eu-central-1-1.ec2.cloud.redislabs.com:10582",
+  username:"Cram",
+  password:"Cram123."
+}); */
+
 const get = async (key) => {
   
   const value = await redisClient.get(key);
@@ -15,10 +29,9 @@ const get = async (key) => {
 
 }
 
-const set = async (data,key) => {
+const set = async (key,data) => {
   
   await redisClient.set(key, JSON.stringify(data));
-  redisClient.quit();
 
 }
 
@@ -41,17 +54,20 @@ const redisDemo = async (data) => {
 
 router.get('/', async (req, res) => {
   try {
-    const priceFromRedis = await get("prices")
+    const priceFromRedis = await redisClient.get('prices');
     if(priceFromRedis){
       console.log("REDIS DATA",JSON.parse(priceFromRedis))
       return res.render("index")
     }
     const prices = await ApiService.index();
-    await set(prices.data);
+    await set("prices",prices.data);
+    const price = await get("prices")
+    console.log(price)
     res.render('index');
   } catch (error) {
     res.status(500).send(error.message);
   }
+
 });
 
 module.exports = router;
