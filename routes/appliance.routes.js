@@ -1,14 +1,16 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const {createAppliance, findAllAppliances} = require('../controllers/appliance')
+const { createAppliance, findAllAppliances } = require('../controllers/appliance')
+const { findConsumAndType}=require('../controllers/consum')
 
 
 
 router.get('/appliance/create', (req, res, next) => {
     try {
-        // const idUser = req.query;
-        // console.log(idUser)
-        res.status(200).render('appliance/addAppliance')
+      
+        const consumType = findConsumAndType();
+        console.log('consumo y tipo',consumType)
+        res.status(200).render('appliance/addAppliance',consumType);
     } catch (error) {
         
         console.log('hay un error', error)
