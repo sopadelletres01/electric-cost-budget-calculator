@@ -6,8 +6,8 @@ const {createAppliance, findAllAppliances} = require('../controllers/appliance')
 
 router.get('/appliance/create', (req, res, next) => {
     try {
-        const idUser = req.query;
-        console.log(idUser)
+        // const idUser = req.query;
+        // console.log(idUser)
         res.status(200).render('appliance/addAppliance')
     } catch (error) {
         
@@ -15,4 +15,5 @@ router.get('/appliance/create', (req, res, next) => {
     }
 });
 router.post('/appliance/create', createAppliance);
+
 
