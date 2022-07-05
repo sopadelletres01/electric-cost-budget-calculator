@@ -1,20 +1,18 @@
-/* const redis = require('redis');
-const PORT_REDIS = process.env.PORT || 6379;
-const redisClient = redis.createClient(PORT_REDIS);
-const set = async (key, value) => {
-  await redisClient.set(key, JSON.stringify(value));
-};
-const get = async (req, res, next) => {
-  let key = req.route.path;
-  await redisClient.get(key, (error, data) => {
-    if (error) res.status(400).send(err);
-    if (data !== null) res.status(200).send(JSON.parse(data));
-    else next();
-  });
+/* const redisClient = new Redis({
+  host: '127.0.0.1',
+  port: 6379,
+}); */
+const Redis = require('ioredis');
+
+const redisClient = new Redis(`redis://${process.env.REDIS_USER}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_URL}:${process.env.REDIS_CLOUD_PORT}/0`);
+
+const get = async key => {
+  const value = await redisClient.get(key);
+  return value;
 };
 
-module.exports = {
-  set,
-  get,
+const set = async (key, data) => {
+  await redisClient.set(key, JSON.stringify(data));
 };
- */
+
+module.exports = { get, set };

@@ -57,19 +57,14 @@ exports.signup = async (req, res, next) => {
       })
       .catch(error => {
         if (error instanceof mongoose.Error.ValidationError) {
-          return res
-            .status(400)
-            .render('auth/signup', { errorMessage: error.message });
+          return res.status(400).render('auth/signup', { errorMessage: error.message });
         }
         if (error.code === 11000) {
           return res.status(400).render('auth/signup', {
-            errorMessage:
-              'Username need to be unique. The username you chose is already in use.',
+            errorMessage: 'Username need to be unique. The username you chose is already in use.',
           });
         }
-        return res
-          .status(500)
-          .render('auth/signup', { errorMessage: error.message });
+        return res.status(500).render('auth/signup', { errorMessage: error.message });
       });
   });
 };
@@ -125,9 +120,7 @@ exports.login = async (req, res, next) => {
 exports.logout = async (req, res) => {
   req.session.destroy(err => {
     if (err) {
-      return res
-        .status(500)
-        .render('auth/logout', { errorMessage: err.message });
+      return res.status(500).render('auth/logout', { errorMessage: err.message });
     }
     res.redirect('/');
   });
