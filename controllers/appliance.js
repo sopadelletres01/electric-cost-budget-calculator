@@ -53,3 +53,14 @@ exports.updateAppliance = async (req, res, next) => {
     console.log('El error es ', error);
   }
 };
+
+exports.deleteAppliance = async (req,res,next) => {
+  try{
+    console.log(req.params.id)
+    const appliance = await Appliance.findByIdAndDelete(req.params.id)
+    console.log(appliance)
+    res.redirect("/appliance/list")
+  }catch(error){
+    console.log('El error es ', error);
+  }
+}

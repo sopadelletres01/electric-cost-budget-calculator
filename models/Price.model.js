@@ -7,6 +7,7 @@ const priceSchema = new Schema(
     hour: {
       type: String,
       required: true,
+      unique:true,
       enum: [
         '00-01',
         '01-02',
@@ -38,9 +39,9 @@ const priceSchema = new Schema(
       type: Boolean,
       required: false,
     },
-    isUnderAvg: {
-      type: Boolean,
-      required: false,
+    market:{
+        type:String,
+        required:false
     },
     price: {
       type: Number,

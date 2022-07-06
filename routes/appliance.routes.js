@@ -1,10 +1,15 @@
 const router = require('express').Router();
 
+const Appliance = require("../models/Appliance.model")
+const Consumption = require("../models/Consumption.model")
+
 const {
   createAppliance,
   listAppliance,
   updateAppliance,
   findAllAppliances,
+  deleteAppliance
+
 } = require('../controllers/appliance');
 
 const { findConsumAndTypeS, findConsumAndTypeL, findApplinceS } = require('../controllers/consum');
@@ -22,9 +27,20 @@ router.get('/create', async (req, res, next) => {
 });
 router.post('/create', createAppliance);
 
+router.get('/:id/update', async (req,res)=>{
+  const appliance = await Appliance.findById(req.params.id).populate("type consum")
+  const consumArr = await Consumption.find({})
+
+  res.render("appliance/editAppliance",{appliance,consumArr})
+});
+
+
 router.post('/:id/update', updateAppliance);
 
 router.get('/list', listAppliance);
+
+router.post('/:id/delete', deleteAppliance);
+
 
 router.get('/budget', async (req, res, next) => { 
   try {

@@ -3,7 +3,7 @@
   <table>
     <tr>
       <th>Tipo </th>
-      <th>Potencia (Kw)</th>
+      <th>Potencia (Mw)</th>
       <th>Etiqueta energética</th>
       <th>Multiplicador consumo</th>
       <th>Gastos Acumulado (€)</th>
@@ -13,35 +13,34 @@
     </tr>
     {{#each appliances}}
       <tr>
-      <form action="/appliance/{{this.id}}/update" method="POST">
+      <form action="/appliance/{{this._id}}/delete" method="POST">
         <td>{{this.type.name}}</td>
         <td>
           {{this.type.power.[1]}}
         </td>
         <td>
-          <select name='consum'>
-            <option selected hidden value={{this.consum._id}}>{{this.consum.name}}</option>
-            {{#each ../consumArr}}
-              <option value={{this._id}}>{{this.name}}</option>
-            {{/each}}
-          </select>
+          {{this.consum.name}}
         </td>
         <td>{{this.consum.budget}} ({{this.consum.name}})</td>
         <td>{{this.totalCost}}</td>
         <td>{{this.createdAt}}</td>
         <td>
-            <button class="actionBtn" type="submit">
-              <i
+            <a href="/appliance/{{this._id}}/update"> <i
               class='fa fa-pencil'
               aria-hidden='true'
-              ></i>
-            </button>
+              ></i></a>
+
         </td>
         <td>
-          <a href='/appliance/{{this.id}}/delete'><i
+          <button class="actionBtn" type="submit">
+            <a href="">
+              <i
               class='fa fa-trash'
               aria-hidden='true'
-            ></i></a>
+              ></i>
+
+            </a>
+            </button>
         </td>
       </form>
       </tr>
