@@ -33,6 +33,9 @@ app.use('/auth', authRoutes);
 const applianceRoutes = require('./routes/appliance.routes');
 app.use('/appliance', applianceRoutes);
 
+const budgetRoutes = require('./routes/appliance.routes');
+app.use('/budget', budgetRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
 

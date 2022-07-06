@@ -6,7 +6,7 @@ const typesSchema = new Schema(
       required: true,
       unique: true,
     },
-    consum: {
+    power: {
       type: [Number],
       required: true,
     },

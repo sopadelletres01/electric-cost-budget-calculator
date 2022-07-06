@@ -25,6 +25,10 @@ const applianceSchema = new Schema(
       type: Number,
       required: false,
     },
+    power: {
+      type:Schema.ObjectId,
+      ref:'Type'
+    }
   },
   {
     timestamps: true,

@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const mongoose = require('mongoose');
+
 const {
   createAppliance,
   findAllAppliances,
 
+
 } = require('../controllers/appliance');
-const { findConsumAndTypeS,findConsumAndTypeL } = require('../controllers/consum');
+const { findConsumAndTypeS,findConsumAndTypeL,findApplinceS } = require('../controllers/consum');
 
 router.get('/create', async (req, res, next) => {
   try {
@@ -21,11 +22,17 @@ router.get('/create', async (req, res, next) => {
 router.post('/create', createAppliance);
 
 router.get('/budget', async (req, res, next) => { 
-  const userId = req.session.userId;
-  const type=req.params
-  const consumTypeS = await findApplinceS(userId);
-  console.log('tipos de consumo en los Esporádicos', { consumTypeS })
-
+  try {
+    const userId = req.session;
+    console.log(userId)
+    const type = req.params
+    console.log(type)
+    const consumTypeS = await findApplinceS(userId, type);
+    console.log('tipos de consumo en los Esporádicos', { consumTypeS })
+    // res.render('buget/createBudget', { consumTypeS })
+  } catch (error) {
+    console.log('error en la ruta de coger los electrodomésticos de un usuario', error)
+  }
 })
 
 module.exports = router;

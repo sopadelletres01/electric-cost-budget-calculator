@@ -39,9 +39,10 @@ exports.findTypesS = async () => {
 }
 exports.findApplinceS = async ( userId, type) => { 
   try {
-    const myAppliances = await Appliance.find({ _id: userId, type: type })
+    
+    const myAppliances = await Appliance.find({ userId: userId, longDuration:false })
     console.log('mis electrodomesticos', myAppliances)
-    return {myAppliances}
+    return myAppliances
     
   } catch (error) {
 
