@@ -1,20 +1,32 @@
 <form>
     {{!-- Typos NAME --}}
-    {{!-- <select> 
+    <select> 
         {{#each consumTypeS}}
         {{!-- Hacer  --}}
         <option value={{this._id}}>{{this.}}</option>
         {{/each}}
 
     </select>
-    {{!-- Typos CONSUM --}}
-     <select> 
-        {{#each consumTypeS}}
-        {{!-- Hacer  --}}
-        <option value={{this.id}}>{{this.}}</option>
-        {{/each}}
-    </select> --}}
+    {{!-- FALTA para la hora --}}
+    {{!-- FALTA tiempo de trabajo en minutos --}}
+   
 
 
     <button > Consultar</button>
+    {{!-- Hace un post y nos da la infomacion de:
+    1. precio que costaria a esa hora y en ese tiempo que viene en minutos
+    2. el precio optimo del dia con esos minutos de trabajo --}}
 </form>
+
+
+{{!-- Nos devolvería una render con !!!! dos 2 formularios ¡¡¡¡¡¡
+1. Muestra el precio de lo que nos costaria el servicio del electrodoméstico a la hora 
+OPTIMA tiene un boton que nos haria UPDATE
+al campo de  totalCost de Appliance sumandole al precio anterior el nuevo.
+y nos haria un redirect al listAppliance
+
+
+2. Muestra el precio a la hora que habiamos seleccionado.
+tiene un boton que nos haria UPDATE
+al campo de  totalCost de Appliance sumandole al precio anterior el nuevo
+ --}}
