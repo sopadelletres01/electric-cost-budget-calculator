@@ -24,6 +24,7 @@ const applianceSchema = new Schema(
     totalCost: {
       type: Number,
       required: false,
+      default: 0
     },
   },
   {

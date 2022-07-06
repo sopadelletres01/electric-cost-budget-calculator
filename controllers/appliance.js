@@ -10,7 +10,7 @@ exports.createAppliance = async (req, res, next) => {
     const appliance = await Appliance.create({ type, consum, userId, longDuration });
     console.log(appliance);
     console.log('El electrodoméstico ha sido creado CORRECTAMENTE.');
-    res.status(200).redirect('appliance/lisAppliance');
+    res.status(200).redirect('/appliance/list');
   } catch (err) {
     console.log('hay un error', err);
   }
