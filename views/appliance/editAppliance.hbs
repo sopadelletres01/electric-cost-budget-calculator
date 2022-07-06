@@ -3,29 +3,15 @@
 <div>
   {{! nos dará la vista para luego modificarla }}
   <form action='/appliance/{{appliance.id}}/update' method='POST'>
-    <label for='typeAppliance'> Tipo de Electrodoméstico</label>
-      <select name='type'>
-        {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
-        <option default></option>
-        {{#each consumTypeL.type}}
-          <option value={{this._id}}>{{this.name}}</option>
-        {{/each}}
-      </select>
-      <label for='typeConsum'>Categoria energetica</label>
+    <label for="">Tipo Electrodomestico</label>
+    <input type="text" value={{appliance.type.name}} readonly> </input>
+    <label for="">Etiqueta Energética</label>
       <select name='consum'>
-        {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
-        {{#each consumTypeL.consums}}
+        <option selected hidden value={{appliance.consum._id}}>{{appliance.consum.name}}</option>
+        {{#each consumArr}}
           <option value={{this._id}}>{{this.name}}</option>
         {{/each}}
       </select>
-    <label for='typeConsum'>Categoria energetica</label>
-    <select>
-      {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
-      {{!-- {{#each }}
-        <option value="{{appliance.consum}}"></option>
-        {{/each}} --}}
-
-    </select>
     <button type='submit'>guardar</button>
   </form>
 </div>
