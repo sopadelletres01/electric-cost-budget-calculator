@@ -37,10 +37,10 @@ exports.findTypesS = async () => {
     console.log('error de consulta solamente de tipos',error)
   }
 }
-exports.findApplinceS = async ( userId, type) => { 
+exports.findApplianceS = async (userId) => { 
   try {
     
-    const myAppliances = await Appliance.find({ userId: userId, longDuration:false })
+    const myAppliances = await Appliance.find({ userId: userId, longDuration:false }).populate("type")
     console.log('mis electrodomesticos', myAppliances)
     return myAppliances
     

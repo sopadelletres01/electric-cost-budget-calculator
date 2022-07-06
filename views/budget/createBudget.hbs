@@ -1,12 +1,22 @@
-<form>
+<form >
     {{!-- Typos NAME --}}
     <select> 
-        {{#each consumTypeS}}
+        {{#each myAppliances}}
         {{!-- Hacer  --}}
-        <option value={{this._id}}>{{this.}}</option>
+        <option value={{this._id}}>{{this.type.name}}</option>
         {{/each}}
 
     </select>
+    <select>
+         {{#each hours}}
+        {{!-- Hacer  --}}
+        <option value={{this._id}}>{{this.hour}}</option>
+        {{/each}}
+
+        
+    </select>
+    
+    
     {{!-- FALTA para la hora --}}
     {{!-- FALTA tiempo de trabajo en minutos --}}
    

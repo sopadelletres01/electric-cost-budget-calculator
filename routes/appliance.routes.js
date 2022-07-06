@@ -5,10 +5,9 @@ const {
   listAppliance,
   updateAppliance,
   findAllAppliances,
-
-
 } = require('../controllers/appliance');
-const { findConsumAndTypeS,findConsumAndTypeL,findApplinceS } = require('../controllers/consum');
+
+const { findConsumAndTypeS, findConsumAndTypeL, findApplinceS } = require('../controllers/consum');
 
 router.get('/create', async (req, res, next) => {
   try {

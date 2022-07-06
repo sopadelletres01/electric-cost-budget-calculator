@@ -37,8 +37,9 @@ app.use('/auth', authRoutes);
 const applianceRoutes = require('./routes/appliance.routes');
 app.use('/appliance', applianceRoutes);
 
-const budgetRoutes = require('./routes/appliance.routes');
+const budgetRoutes = require('./routes/budget.routes');
 app.use('/budget', budgetRoutes);
+
 const priceRoutes = require('./routes/externalAPI/index');
 app.use('/price', priceRoutes);
 
