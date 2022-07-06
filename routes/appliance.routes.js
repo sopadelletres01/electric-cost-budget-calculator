@@ -2,7 +2,8 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 const {
   createAppliance,
-  findAllAppliances,
+  listAppliance,
+  updateAppliance
 } = require('../controllers/appliance');
 const { findConsumAndTypeS,findConsumAndTypeL } = require('../controllers/consum');
 
@@ -18,5 +19,9 @@ router.get('/create', async (req, res, next) => {
   }
 });
 router.post('/create', createAppliance);
+
+router.post('/:id/update', updateAppliance);
+
+router.get('/list', listAppliance);
 
 module.exports = router;

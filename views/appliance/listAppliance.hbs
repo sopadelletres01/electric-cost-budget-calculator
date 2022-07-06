@@ -3,21 +3,48 @@
   <table>
     <tr>
       <th>Tipo </th>
-      <th>Consumo </th>
-      <th>Gatos Acumulado</th>
+      <th>Potencia (Kw)</th>
+      <th>Etiqueta energética</th>
+      <th>Modificador consumo</th>
+      <th>Gastos Acumulado</th>
       <th>Creación </th>
-      <th> </th>
+      <th>Editar</th>
+      <th>Eliminar</th>
     </tr>
-    {{#each appliance}}
+    {{#each appliances}}
       <tr>
-        <td>{{this.type}}</td>
-        <td>{{this.consum}}</td>
-        <td>{{this.totalCost}}</td>
-        <td>{{this.created}}</td>
+      <form action="/appliance/{{this.id}}/update" method="POST">
+        <td>{{this.type.name}}</td>
         <td>
-          icono de modificar
+          {{this.type.power.[1]}}
         </td>
+        <td>
+          <select name='consum'>
+            {{#each ../consumArr}}
+              <option value={{this._id}}>{{this.name}}</option>
+            {{/each}}
+          </select>
+        </td>
+        <td>{{this.consum.budget}}</td>
+        <td>{{this.totalCost}}</td>
+        <td>{{this.createdAt}}</td>
+        <td>
+            <button class="actionBtn" type="submit">
+              <i
+              class='fa fa-pencil'
+              aria-hidden='true'
+              ></i>
+            </button>
+        </td>
+        <td>
+          <a href='/appliance/{{this.id}}/delete'><i
+              class='fa fa-trash'
+              aria-hidden='true'
+            ></i></a>
+        </td>
+      </form>
       </tr>
+
     {{/each}}
   </table>
 </div>

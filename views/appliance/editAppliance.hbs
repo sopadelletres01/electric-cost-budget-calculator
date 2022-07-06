@@ -4,12 +4,20 @@
   {{! nos dará la vista para luego modificarla }}
   <form action='/appliance/{{appliance.id}}/update' method='POST'>
     <label for='typeAppliance'> Tipo de Electrodoméstico</label>
-    <select>
-      {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
-      {{!-- {{#each }}
-        <option value="{{appliance.type}}"></option>
-        {{/each}} --}}
-    </select>
+      <select name='type'>
+        {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
+        <option default></option>
+        {{#each consumTypeL.type}}
+          <option value={{this._id}}>{{this.name}}</option>
+        {{/each}}
+      </select>
+      <label for='typeConsum'>Categoria energetica</label>
+      <select name='consum'>
+        {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
+        {{#each consumTypeL.consums}}
+          <option value={{this._id}}>{{this.name}}</option>
+        {{/each}}
+      </select>
     <label for='typeConsum'>Categoria energetica</label>
     <select>
       {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
