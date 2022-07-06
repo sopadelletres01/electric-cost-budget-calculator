@@ -1,13 +1,13 @@
-<form >
+<form action="/test" method="POST" >
     {{!-- Typos NAME --}}
-    <select> 
+    <select name="applianceId"> 
         {{#each myAppliances}}
         {{!-- Hacer  --}}
         <option value={{this._id}}>{{this.type.name}}</option>
         {{/each}}
 
     </select>
-    <select>
+    <select name="priceId">
          {{#each hours}}
         {{!-- Hacer  --}}
         <option value={{this._id}}>{{this.hour}}</option>
@@ -16,13 +16,14 @@
         
     </select>
     
+    <input name="minutes">
     
     {{!-- FALTA para la hora --}}
     {{!-- FALTA tiempo de trabajo en minutos --}}
    
 
 
-    <button > Consultar</button>
+    <button type="submit"> Consultar</button>
     {{!-- Hace un post y nos da la infomacion de:
     1. precio que costaria a esa hora y en ese tiempo que viene en minutos
     2. el precio optimo del dia con esos minutos de trabajo --}}
