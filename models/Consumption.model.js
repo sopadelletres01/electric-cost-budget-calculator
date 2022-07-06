@@ -7,8 +7,9 @@ const consumptionSchema = new Schema(
       type: String,
       required: true,
     },
-    value: {
+    budget: {
       type: Number,
+      required: true,
     },
   },
   {

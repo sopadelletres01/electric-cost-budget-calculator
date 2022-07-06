@@ -19,6 +19,7 @@
     "express-session": "^1.17.3",
     "hbs": "^4.2.0",
     "ioredis": "^5.1.0",
+    "moment": "^2.29.3",
     "mongoose": "^6.4.1",
     "morgan": "^1.10.0",
     "open": "^8.4.0",
