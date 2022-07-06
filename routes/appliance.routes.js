@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 const {
   createAppliance,
+  listAppliance,
+  updateAppliance,
   findAllAppliances,
 
 
@@ -20,6 +22,10 @@ router.get('/create', async (req, res, next) => {
   }
 });
 router.post('/create', createAppliance);
+
+router.post('/:id/update', updateAppliance);
+
+router.get('/list', listAppliance);
 
 router.get('/budget', async (req, res, next) => { 
   try {

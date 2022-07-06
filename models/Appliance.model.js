@@ -21,9 +21,19 @@ const applianceSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    hourRange:{
+      type: Schema.ObjectId,
+      ref: "Price",
+      required: false
+    },
+    totalMinutes:{
+      type: Number,
+      required:false
+    },
     totalCost: {
       type: Number,
       required: false,
+      default: 0
     },
     power: {
       type:Schema.ObjectId,
