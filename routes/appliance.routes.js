@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const {
   createAppliance,
   findAllAppliances,
+
 } = require('../controllers/appliance');
 const { findConsumAndTypeS,findConsumAndTypeL } = require('../controllers/consum');
 
@@ -18,5 +19,13 @@ router.get('/create', async (req, res, next) => {
   }
 });
 router.post('/create', createAppliance);
+
+router.get('/budget', async (req, res, next) => { 
+  const userId = req.session.userId;
+  const type=req.params
+  const consumTypeS = await findApplinceS(userId);
+  console.log('tipos de consumo en los Esporádicos', { consumTypeS })
+
+})
 
 module.exports = router;

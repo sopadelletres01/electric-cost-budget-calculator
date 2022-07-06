@@ -1,5 +1,6 @@
 const Consumption = require('../models/Consumption.model');
 const Type = require('../models/Type.model');
+const Appliance = require('../models/Appliance.model')
 
 exports.findConsumAndTypeS = async () => {
   try {
@@ -26,4 +27,26 @@ exports.findConsumAndTypeL = async () => {
     } catch (error) {
       console.log('error a la hora de bucar el consumo y el tipo Long', error);
     }
-  };
+};
+exports.findTypesS = async () => { 
+  try {
+    const typeShort = await Type.find({ longDuration: false })
+    console.log('tipos de corto Uso', typeShort)
+    return typeShort
+  } catch (error) {
+    console.log('error de consulta solamente de tipos',error)
+  }
+}
+exports.findApplinceS = async ( userId, type) => { 
+  try {
+    const myAppliances = await Appliance.find({ _id: userId, type: type })
+    console.log('mis electrodomesticos', myAppliances)
+    return {myAppliances}
+    
+  } catch (error) {
+
+    console.log('error de consulta', error)
+  }
+
+
+}
