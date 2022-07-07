@@ -6,16 +6,27 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: true,
+      unique:true
     },
     email: {
       type: String,
       required: true,
-      unique: true,
+      unique: true
+    },
+    lastname: {
+      type: String,
+      required: false,
+      default:" "
+    },
+    name: {
+      type: String,
+      required: false,
+      default:" "
     },
     password: {
       type: String,
       required: true,
-      minLength: 8,
+      minLength: 8
     },
     lisAppliance: [
       {

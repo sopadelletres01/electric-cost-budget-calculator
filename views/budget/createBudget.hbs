@@ -1,4 +1,7 @@
+
+
 <form action="/budget/create" method="POST" >
+    <input type="hidden" name="_csrf" value={{csrfToken}}>
     {{!-- Typos NAME --}}
     <label for="">Electrodomestico</label>
     <select name="applianceId"> 
