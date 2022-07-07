@@ -8,6 +8,10 @@ h1 {
   }
 }
 
+h2 {
+  text-align: center;
+}
+
 /* public/stylesheets/style.css */
 body {
   padding: 50px;
@@ -116,13 +120,13 @@ ul {
   width: 120px;
 }
 
-.navbar{
+.navbar {
   display: flex;
   gap: 1rem;
   padding: 20px 10px;
   background: rgba(175, 183, 184, 0.562);
-  a:hover{
-    opacity: .5;
+  a:hover {
+    opacity: 0.5;
   }
 }
 
@@ -131,15 +135,16 @@ table {
   border-collapse: collapse;
   width: 100%;
   border: 1px solid rgba(190, 188, 188, 0.664);
-  form{
+  form {
     width: unset;
     margin: 0;
   }
-  .actionBtn{
+  .actionBtn {
     width: fit-content;
     margin: 0;
   }
-  td, th {
+  td,
+  th {
     text-align: center;
     padding: 8px;
   }
@@ -147,6 +152,3 @@ table {
     background-color: #dddddd;
   }
 }
-
-
-

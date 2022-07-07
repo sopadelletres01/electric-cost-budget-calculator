@@ -1,0 +1,76 @@
+<h1>Vista Previa</h1>
+<hr>
+
+<h2>Seleccion actual</h2>
+<form action="/test" method="POST" >
+    {{!-- Typos NAME --}}
+    <input type="hidden" name="applianceId" value={{selectedAppliance._id}}>
+    <input type="hidden" name="total" value={{total}}>
+    
+    <label for="">Potencia (Mw)</label>        
+    <input readonly type="text" value={{selectedAppliance.type.power.[1]}} >
+    
+    <label for="">Multiplicador energetico</label>    
+    <input readonly type="text" value={{selectedAppliance.consum.budget}} >
+    
+    <label for="">Tipo Electrodoméstico</label>
+    <input readonly type="text" value={{selectedAppliance.type.name}} >
+    
+    <label for="">Hora Seleccionada</label>
+    <input readonly type="text" value={{selectedPrice.hour}} >
+    
+    <label for="">Minutos Seleccionados</label>
+    <input readonly type="text" value={{selectedMinutes}} >
+
+    <h3>Total:</h3>
+    <b>{{total}} €</b>
+    {{!-- FALTA para la hora --}}
+    {{!-- FALTA tiempo de trabajo en minutos --}}
+   
+
+
+    <button type="submit">Añadir uso</button>
+    {{!-- Hace un post y nos da la infomacion de:
+    1. precio que costaria a esa hora y en ese tiempo que viene en minutos
+    2. el precio optimo del dia con esos minutos de trabajo --}}
+</form>
+
+<h2>Precio mas barato del dia</h2>
+<form action="/test" method="POST" >
+    {{!-- Typos NAME --}}
+    <input type="hidden"  name="applianceId" value={{selectedAppliance._id}}>
+    <input type="hidden" name="minTotal" value={{minTotal}}>
+    
+    <label for="">Hora Óptima</label>        
+    <input readonly type="text" value={{minPrice.hour}} >
+   
+
+    <h3>Total:</h3>
+    <b>{{minTotal}} €</b>
+
+    <h4>Diferencia (Seleccionado - óptimo):</h4>
+    <p>{{total}}€ - {{minTotal}}€</p>
+    <span>Te ahorras: </span><b>{{diferencia}}€</b>
+    {{!-- FALTA para la hora --}}
+    {{!-- FALTA tiempo de trabajo en minutos --}}
+   
+
+
+    <button type="submit">Añadir uso</button>
+    {{!-- Hace un post y nos da la infomacion de:
+    1. precio que costaria a esa hora y en ese tiempo que viene en minutos
+    2. el precio optimo del dia con esos minutos de trabajo --}}
+</form>
+
+
+{{!-- Nos devolvería una render con !!!! dos 2 formularios ¡¡¡¡¡¡
+1. Muestra el precio de lo que nos costaria el servicio del electrodoméstico a la hora 
+OPTIMA tiene un boton que nos haria UPDATE
+al campo de  totalCost de Appliance sumandole al precio anterior el nuevo.
+y nos haria un redirect al listAppliance
+
+
+2. Muestra el precio a la hora que habiamos seleccionado.
+tiene un boton que nos haria UPDATE
+al campo de  totalCost de Appliance sumandole al precio anterior el nuevo
+ --}}

@@ -57,7 +57,7 @@ const calculatePrice = async (req, res, pId) => {
   //console.log(pricesArr)
   //console.log(price)
   let total = 0;
-  if (totalHours < 1) {
+  if (totalHours <= 1) {
     let power = appliance.type.power[1]; //MW
     let hours = minutes / 60;
     let energy = power * hours;
@@ -105,28 +105,49 @@ const calculatePrice = async (req, res, pId) => {
   console.log('CompleteHours', totalHours);
   console.log('MinutosRestantes', restMinutes);
 
-  res.render('budget/detailBudget');
   return total
 };
 
 
 
 router.post('/test', async (req, res, next) => {
-  const total = await calculatePrice(req, res);
-  console.log("ToTALtOTAL",total)
+
   const {
     data: { hour: minHour, price: minPrice },
   } = await ApiService.min();
-  console.log('hour', minHour, 'price', minPrice);
-});
 
+  const selectedAppliance = await Appliance.findById(req.body.applianceId).populate("type consum")
+  console.log("applainces",selectedAppliance)
+  const selectedPrice = await Price.findById(req.body.priceId)
+  const price = await Price.findOne({hour:minHour})
+
+  const total = await calculatePrice(req, res);
+  const minTotal = await calculatePrice(req, res, price._id);
+  
+  const diferencia = total - minTotal
+  console.log("ToTALtOTAL",total)
+
+  console.log("ToTALtOTAL",total)
+  console.log("MINtOTAL",minTotal)
+  console.log('hour', minHour, 'price', minPrice);
+  res.render('budget/detailBudget',{
+    minPrice:price,
+    selectedPrice,
+    selectedAppliance,
+    total : total.toFixed(2),
+    diferencia : diferencia.toFixed(2),
+    minTotal : minTotal.toFixed(2),
+    selectedMinutes: req.body.minutes
+  });
+});
+ 
 //We have to return:
-//Selected power
-//Selected appliance
-//Budget multplier applied to price
-//Selected initialHour
-//Selected minutes
-//Calculated price
+//Selected power 🆗
+//Selected appliance 🆗
+ //Budget multplier applied to price 🆗
+//Selected initialHour 🆗
+//Selected minutes 🆗
+//Calculated price 🆗
 
 //Optimal hour
 //Optimal price
