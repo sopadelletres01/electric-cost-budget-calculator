@@ -7,6 +7,10 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(response => {
     console.log('Base de datos conectada');
+    return Price.deleteMany()
+  })
+  .then(response=>{
+    console.log("Deleted all prices")
     return ApiService.index();
   })
   .then(data => {

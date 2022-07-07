@@ -51,6 +51,7 @@ module.exports = app => {
   // Handles access to the favicon
   app.use(favicon(path.join(__dirname, '..', 'public', 'images', 'favicon.ico')));
 
+  require("../utils/setupCron")()
   // ℹ️ Middleware that adds a "req.session" information and later to check that you are who you say you are 😅
   app.use(
     session({
