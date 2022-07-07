@@ -3,6 +3,8 @@
 <div>
   {{! nos dará la vista para luego modificarla }}
   <form action='/appliance/{{appliance.id}}/update' method='POST'>
+    <input type="hidden" name="_csrf" value={{csrfToken}}>
+
     <label for="">Tipo Electrodomestico</label>
     <input type="text" value={{appliance.type.name}} readonly> </input>
     <label for="">Etiqueta Energética</label>

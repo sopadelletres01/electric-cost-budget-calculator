@@ -8,8 +8,6 @@ require('./db');
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require('express');
-const csrf = require('csurf');
-
 
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
@@ -24,7 +22,6 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require('./config')(app);
 
-const csrfProteccion = csrf({cookie:true})
 const capitalized = require('./utils/capitalized');
 const projectName = 'electric-calculator';
 

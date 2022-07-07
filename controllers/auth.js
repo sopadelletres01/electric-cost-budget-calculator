@@ -9,12 +9,14 @@ exports.signup = async (req, res, next) => {
 
   if (!username) {
     return res.status(400).render('auth/signup', {
+      csrfToken: req.csrfToken(),
       errorMessage: 'Please provide your username.',
     });
   }
   // validator
   if (password.length < 8) {
     return res.status(400).render('auth/signup', {
+      csrfToken: req.csrfToken(),
       errorMessage: 'Your password needs to be at least 8 characters long.',
     });
   }
@@ -36,6 +38,7 @@ exports.signup = async (req, res, next) => {
     // If the user is found, send the message username is taken
     if (found) {
       return res.status(400).render('auth/signup', {
+        csrfToken: req.csrfToken(),
         errorMessage: 'Username already taken.',
       });
     }

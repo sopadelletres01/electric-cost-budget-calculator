@@ -1,11 +1,14 @@
 const router = require('express').Router();
+const csrf = require('csurf');
+
+const csrfProteccion = csrf({cookie:true})
 const {
     findApplianceS
 } = require('../controllers/consum');
 const { findHours}= require('../controllers/precio')
 
 
-router.get('/',async (req, res, next) => { 
+router.get('/',csrfProteccion,async (req, res, next) => { 
     try {
         const userId = req.session.user;
         const myAppliances = await findApplianceS(userId);

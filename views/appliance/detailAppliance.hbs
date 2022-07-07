@@ -17,10 +17,14 @@
       <td>{{appliance.created}}</td>
       <td>
         <form action='/appliance/{{appliance.id}}/delete' method='DELETE'>
+          <input type="hidden" name="_csrf" value={{csrfToken}}>
+
           <button type='submit'>Borrar</button>
         </form>
         {{! nos dará la vista para luego modificarla }}
         <form action='/appliance/{{appliance.id}}/edit' method='GET'>
+          <input type="hidden" name="_csrf" value={{csrfToken}}>
+
           <button type='submit'>Editar</button>
         </form>
       </td>

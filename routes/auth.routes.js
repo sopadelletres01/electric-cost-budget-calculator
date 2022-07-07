@@ -1,4 +1,8 @@
 const router = require('express').Router();
+const csrf = require('csurf');
+
+const csrfProteccion = csrf({cookie:true})
+console.log(csrfProteccion)
 
 // ℹ️ Handles password encryption
 const mongoose = require('mongoose');
@@ -11,18 +15,18 @@ const isLoggedOut = require('../middleware/isLoggedOut');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const { signup, login, logout } = require('../controllers/auth');
 
-router.get('/signup', isLoggedOut, (req, res) => {
+router.get('/signup',[csrfProteccion, isLoggedOut], (req, res) => {
   res.render('auth/signup');
 });
 
-router.post('/signup', isLoggedOut, signup);
+router.post('/signup',[csrfProteccion, isLoggedOut], signup);
 
-router.get('/login', isLoggedOut, (req, res) => {
-  res.render('auth/login');
+router.get('/login',[csrfProteccion, isLoggedOut], (req, res) => {
+  res.render('auth/login',{ csrfToken: req.csrfToken() });
 });
 
-router.post('/login', isLoggedOut, login);
+router.post('/login',[csrfProteccion, isLoggedOut], login);
 
-router.get('/logout', isLoggedIn, logout);
+router.get('/logout',[csrfProteccion, isLoggedIn], logout);
 
 module.exports = router;
