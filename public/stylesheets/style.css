@@ -6,6 +6,10 @@ h1 span {
   color: white;
 }
 
+h2 {
+  text-align: center;
+}
+
 /* public/stylesheets/style.css */
 body {
   padding: 50px;
@@ -136,7 +140,8 @@ table .actionBtn {
   width: fit-content;
   margin: 0;
 }
-table td, table th {
+table td,
+table th {
   text-align: center;
   padding: 8px;
 }

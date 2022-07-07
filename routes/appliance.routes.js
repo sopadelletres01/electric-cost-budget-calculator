@@ -10,7 +10,8 @@ const {
   listAppliance,
   updateAppliance,
   findAllAppliances,
-  deleteAppliance
+  deleteAppliance,
+  updateApplianceCost
 
 } = require('../controllers/appliance');
 
@@ -38,6 +39,8 @@ router.get('/:id/update', async (req,res)=>{
 
 
 router.post('/:id/update', csrfProteccion,updateAppliance);
+
+router.post('/:id/updateCost', updateApplianceCost);
 
 router.get('/list', listAppliance);
 

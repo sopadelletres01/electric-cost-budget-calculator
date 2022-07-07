@@ -1,14 +1,17 @@
-<form action="/test" method="POST" >
-    <input type="hidden" name="_csrf" value={{csrfToken}}>
 
+
+<form action="/budget/create" method="POST" >
+    <input type="hidden" name="_csrf" value={{csrfToken}}>
     {{!-- Typos NAME --}}
+    <label for="">Electrodomestico</label>
     <select name="applianceId"> 
         {{#each myAppliances}}
         {{!-- Hacer  --}}
-        <option value={{this._id}}>{{this.type.name}}</option>
+        <option value={{this._id}}>[{{this.type.name}}] {{this.name}} ({{this.consum.name}})</option>
         {{/each}}
 
     </select>
+    <label for="">Hora inicial prevista</label>
     <select name="priceId">
          {{#each hours}}
         {{!-- Hacer  --}}
@@ -17,6 +20,7 @@
 
         
     </select>
+    <label for="">Minutos de trabajo</label>
     
     <input name="minutes">
     
@@ -25,7 +29,7 @@
    
 
 
-    <button type="submit"> Consultar</button>
+    <button type="submit">Consultar</button>
     {{!-- Hace un post y nos da la infomacion de:
     1. precio que costaria a esa hora y en ese tiempo que viene en minutos
     2. el precio optimo del dia con esos minutos de trabajo --}}

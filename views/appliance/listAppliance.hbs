@@ -2,7 +2,8 @@
 <div class='appliance__list'>
   <table>
     <tr>
-      <th>Tipo </th>
+      <th>Nombre</th>
+      <th>Tipo</th>
       <th>Potencia (Mw)</th>
       <th>Etiqueta energética</th>
       <th>Multiplicador consumo</th>
@@ -16,6 +17,7 @@
       <form action="/appliance/{{this._id}}/delete" method="POST">
         <input type="hidden" name="_csrf" value={{csrfToken}}>
 
+        <td>{{this.name}}</td>
         <td>{{this.type.name}}</td>
         <td>
           {{this.type.power.[1]}}
