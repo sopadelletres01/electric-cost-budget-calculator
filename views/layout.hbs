@@ -11,14 +11,28 @@
 
   <body>
     <nav class="navbar">
-      <a href='/auth/login'>Login</a>
-      <a href='/auth/signup'>Signup</a>
-      <a href='/auth/logout'>Logout</a>
-      <a href='/auth/profile'>Perfil</a>
-      <a href="/appliance/create">Crear electrodoméstico</a>
-      <a href="/appliance/list">Mis electrodomésticos</a>
-      <a href="/budget">Consultar consumo</a>
-      <a href="/budget/create">crear consulta </a>
+      <a class="navItem" href="/appliance/create"><img class="icons" src='../images/lavavajillas.png'/>
+      <h3>Añadir electrodomestico</h3>
+      </a>
+      <a class="navItem" href="/appliance/list"><img class="icons" src='../images/lista-de-verificacion.png'/>
+      <h3>Ver mis electrodomesticos</h3>
+      </a>
+      <a class="navItem"  href="/budget"><img class="icons" src='../images/luz-de-ahorro-de-energia.png'/>
+      <h3>Consulta gasto</h3>
+      </a>
+     
+      <a class="navItem" href="/budget/create">
+      <img class="icons" src='../images/mejor-precio.png'/>
+      <h3>Consulta gasto</h3>
+       </a>
+
+      <div class="navDiv">
+
+        <a  href='/auth/login'><img class="icons" src='../images/entrar.png'/></a>
+        <a  href='/auth/profile'><img class="icons" src='../images/profile.png'/></a>
+        <a  href='/auth/signup'><img class="icons" src='../images/anadir-amigo.png'/></a>
+        <a  href='/auth/logout'><img class="icons" src='../images/shutdown.png'/></a>
+      </div>
       
 
     </nav>
