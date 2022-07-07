@@ -47,10 +47,10 @@ const calculatePrice = async (req, res, pId) => {
   let completeHours = Math.floor(minutes / 60);
   //Minutos sobrantes a partir del residuo de las horas
   let restMinutes = ((minutes / 60).toFixed(2).split('.')[1] * 60) / 100;
-  //Potencia calculado con el multiplicador
-  let pow = appliance.type.power[1] * appliance.consum.budget;
+  //Multiplicador de energia
+  let multiplier = appliance.consum.budget;
   console.log('budget', appliance.consum.budget);
-  console.log('POW', pow);
+  console.log('POW', multiplier);
   console.log('CHOUR', completeHours);
   console.log('THOUR', totalHours);
   //{$and:[{hour:{$gt:"01-02"}},{hour:{$lt:"04-05"}}]}
@@ -60,7 +60,7 @@ const calculatePrice = async (req, res, pId) => {
   if (totalHours <= 1) {
     let power = appliance.type.power[1]; //MW
     let hours = minutes / 60;
-    let energy = power * hours;
+    let energy = (power * hours)*multiplier;
     let pricee = (price.price * energy) / 1; //€ / MWh
     total = pricee;
     console.log('pow(Mw)', power, 'hours', hours, 'energy(Mwh)', energy, 'price(€)', pricee, 'total(€)', total);
@@ -85,7 +85,7 @@ const calculatePrice = async (req, res, pId) => {
       const element = pricesRange[index];
       let power = appliance.type.power[1]; //MW
       let hours = 1;
-      let energy = power * hours;
+      let energy = (power * hours)*multiplier  
       let pricee = (element.price * energy) / 1; //€ / MWh
       total += pricee;
       console.log('pow(Mw)', power, 'hours', hours, 'energy(Mwh)', energy, 'price(€)', pricee, 'total(€)', total);
@@ -94,7 +94,7 @@ const calculatePrice = async (req, res, pId) => {
 
     let power = appliance.type.power[1]; //MW
     let hours = restMinutes / 60;
-    let energy = power * hours;
+    let energy = (power * hours)*multiplier;
     //Seleccionamos el ultimo resultado del array de prices
     let pricee = (pricesRange.slice(-1)[0].price * energy) / 1; //€ / MWh
     console.log('PRiceee', pricee);
@@ -117,7 +117,6 @@ router.post('/test', async (req, res, next) => {
   } = await ApiService.min();
 
   const selectedAppliance = await Appliance.findById(req.body.applianceId).populate("type consum")
-  console.log("applainces",selectedAppliance)
   const selectedPrice = await Price.findById(req.body.priceId)
   const price = await Price.findOne({hour:minHour})
 
@@ -125,11 +124,7 @@ router.post('/test', async (req, res, next) => {
   const minTotal = await calculatePrice(req, res, price._id);
   
   const diferencia = total - minTotal
-  console.log("ToTALtOTAL",total)
 
-  console.log("ToTALtOTAL",total)
-  console.log("MINtOTAL",minTotal)
-  console.log('hour', minHour, 'price', minPrice);
   res.render('budget/detailBudget',{
     minPrice:price,
     selectedPrice,

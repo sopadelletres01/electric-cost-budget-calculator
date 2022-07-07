@@ -54,6 +54,19 @@ exports.updateAppliance = async (req, res, next) => {
   }
 };
 
+exports.updateApplianceCost = async (req, res, next) => {
+  try {
+    const {total,applianceId} = req.body
+    const appliance = await Appliance.findById(applianceId);
+    const update = {totalCost: Number(total) + appliance.totalCost}
+    await appliance.update(update,{new:true})
+    res.redirect('/appliance/list');
+  } catch (error) {
+    console.log('El error es ', error);
+  }
+};
+
+
 exports.deleteAppliance = async (req,res,next) => {
   try{
     console.log(req.params.id)

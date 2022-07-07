@@ -2,7 +2,7 @@
 <hr>
 
 <h2>Seleccion actual</h2>
-<form action="/test" method="POST" >
+<form action="/appliance/{{selectedAppliance._id}}/updateCost" method="POST" >
     {{!-- Typos NAME --}}
     <input type="hidden" name="applianceId" value={{selectedAppliance._id}}>
     <input type="hidden" name="total" value={{total}}>
@@ -22,6 +22,8 @@
     <label for="">Minutos Seleccionados</label>
     <input readonly type="text" value={{selectedMinutes}} >
 
+    <label for="">Precio franja horaria (€/Mwh)</label>        
+    <input readonly type="text" value={{selectedPrice.price}} >
     <h3>Total:</h3>
     <b>{{total}} €</b>
     {{!-- FALTA para la hora --}}
@@ -36,15 +38,17 @@
 </form>
 
 <h2>Precio mas barato del dia</h2>
-<form action="/test" method="POST" >
+<form action="/appliance/{{selectedAppliance._id}}/updateCost" method="POST" >
     {{!-- Typos NAME --}}
     <input type="hidden"  name="applianceId" value={{selectedAppliance._id}}>
-    <input type="hidden" name="minTotal" value={{minTotal}}>
+    <input type="hidden" name="total" value={{minTotal}}>
     
     <label for="">Hora Óptima</label>        
     <input readonly type="text" value={{minPrice.hour}} >
    
-
+    <label for="">Precio franja horaria (€/Mwh)</label>        
+    <input readonly type="text" value={{minPrice.price}} >
+    
     <h3>Total:</h3>
     <b>{{minTotal}} €</b>
 
