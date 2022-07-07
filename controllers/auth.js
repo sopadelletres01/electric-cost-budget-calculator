@@ -1,4 +1,5 @@
-var validator = require('validator');
+const validator = require('validator');
+const valiPass=require('password-validator')
 const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
@@ -6,15 +7,22 @@ const mongoose = require('mongoose');
 const saltRounds = 10;
 exports.signup = async (req, res, next) => {
   const { email, username, password } = req.body;
-
-  if (!username) {
+  if (!validator.isEmail(email)) { 
+    return res.status(400).render('auth/signup', {
+      csrfToken: req.csrfToken(),
+      errorMessage: 'Please provide your email.',
+    });
+  }
+  if (validator.isEmpty(username)) {
     return res.status(400).render('auth/signup', {
       csrfToken: req.csrfToken(),
       errorMessage: 'Please provide your username.',
     });
   }
   // validator
-  if (password.length < 8) {
+  if (!validator.isStrongPassword(password)) {
+    console.log('validador')
+    
     return res.status(400).render('auth/signup', {
       csrfToken: req.csrfToken(),
       errorMessage: 'Your password needs to be at least 8 characters long.',
@@ -85,7 +93,7 @@ exports.login = async (req, res, next) => {
 
   // Here we use the same logic as above
   // - either length based parameters or we check the strength of a password
-  if (password.length < 8) {
+  if (!validator.isStrongPassword(password)) {
     return res.status(400).render('auth/login', {
       errorMessage: 'Your password needs to be at least 8 characters long.',
     });
@@ -130,3 +138,30 @@ exports.logout = async (req, res) => {
     res.redirect('/');
   });
 };
+exports.updatePassword = async (req, res) => { 
+  try {
+    const userId = req.session.user._id
+    const infoUser= await User.findById(userId)
+    const { repPass, pass, newPass } = req.body
+    const hashPass= bcrypt.hashSync(pass,saltRounds)
+    if (bcrypt.compareSync(pass, infoUser.password)) {
+      if (!validator.equals(repPass, newPass) && !validator.isStrongPassword(repPass)) {
+        return res.status(404).render('auth/profilePassword', { csrfToken: req.csrfToken(), errorMessage: 'las contraseñas no coinciden' })
+      } else {
+        const password = await bcrypt.hash(repPass, saltRounds)
+        await User.findByIdAndUpdate(userId, { password: password })
+        if (res.status(200)) { 
+          req.session.destroy(err => {
+            if (err) {
+              return res.status(500).render('auth/logout', { errorMessage: err.message });
+            }
+            res.redirect('/');
+          });
+        }
+      }
+    }
+  } catch (error) { 
+    console.log('error', error)
+  }
+}
+
