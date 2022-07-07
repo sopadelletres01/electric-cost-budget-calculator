@@ -2,7 +2,8 @@
 <div class='appliance__list'>
   <table>
     <tr>
-      <th>Tipo </th>
+      <th>Nombre</th>
+      <th>Tipo</th>
       <th>Potencia (Mw)</th>
       <th>Etiqueta energética</th>
       <th>Multiplicador consumo</th>
@@ -14,6 +15,7 @@
     {{#each appliances}}
       <tr>
       <form action="/appliance/{{this._id}}/delete" method="POST">
+        <td>{{this.name}}</td>
         <td>{{this.type.name}}</td>
         <td>
           {{this.type.power.[1]}}

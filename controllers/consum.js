@@ -40,7 +40,7 @@ exports.findTypesS = async () => {
 exports.findApplianceS = async (userId) => { 
   try {
     
-    const myAppliances = await Appliance.find({ userId: userId, longDuration:false }).populate("type")
+    const myAppliances = await Appliance.find({ userId: userId, longDuration:false }).populate("type consum")
     console.log('mis electrodomesticos', myAppliances)
     return myAppliances
     

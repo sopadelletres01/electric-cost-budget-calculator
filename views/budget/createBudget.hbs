@@ -1,12 +1,14 @@
 <form action="/test" method="POST" >
     {{!-- Typos NAME --}}
+    <label for="">Electrodomestico</label>
     <select name="applianceId"> 
         {{#each myAppliances}}
         {{!-- Hacer  --}}
-        <option value={{this._id}}>{{this.type.name}}</option>
+        <option value={{this._id}}>[{{this.type.name}}] {{this.name}} ({{this.consum.name}})</option>
         {{/each}}
 
     </select>
+    <label for="">Hora inicial prevista</label>
     <select name="priceId">
          {{#each hours}}
         {{!-- Hacer  --}}
@@ -15,6 +17,7 @@
 
         
     </select>
+    <label for="">Minutos de trabajo</label>
     
     <input name="minutes">
     
