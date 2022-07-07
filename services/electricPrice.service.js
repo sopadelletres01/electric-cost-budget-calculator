@@ -7,8 +7,8 @@ class ApiService {
   static min() {
     return httpCnf.get('/min?zone=PCB');
   }
-  static create(resource, data) {
-    return httpCnf.post(`/${resource}`, data);
+  static avg(resource, data) {
+    return httpCnf.get('/avg?zone=PCB');
   }
   static update(resource, id, data) {
     console.log(`/${resource}/${id}`);

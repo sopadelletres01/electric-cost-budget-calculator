@@ -7,8 +7,8 @@
       <th>Potencia (Mw)</th>
       <th>Etiqueta energética</th>
       <th>Multiplicador consumo</th>
-      <th>Gastos Acumulado (€)</th>
       <th>Creación </th>
+      <th>Gastos Acumulado (€)</th>
       <th>Editar</th>
       <th>Eliminar</th>
     </tr>
@@ -24,8 +24,8 @@
           {{this.consum.name}}
         </td>
         <td>{{this.consum.budget}} ({{this.consum.name}})</td>
-        <td>{{this.totalCost}}</td>
         <td>{{this.createdAt}}</td>
+        <td>{{this.totalCost}}</td>
         <td>
             <a href="/appliance/{{this._id}}/update"> <i
               class='fa fa-pencil'
@@ -48,5 +48,15 @@
       </tr>
 
     {{/each}}
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th >Total(€):     {{total}}</th>
+    </tr>
+
   </table>
 </div>

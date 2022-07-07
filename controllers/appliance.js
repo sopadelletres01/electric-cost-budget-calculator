@@ -21,9 +21,13 @@ exports.listAppliance = async (req, res, next) => {
     const userId = req.session.user._id
     const appliances = await Appliance.find({ userId: userId }).populate("type consum")
     //_id : {$not : {$in : appliances.map(a=>a.consum._id) } }
+    let total = 0
+    appliances.forEach(a=>{
+      total+=a.totalCost
+    })
+    console.log("total",total)
     const consumArr = await Consumption.find({})
-    console.log(consumArr)
-    res.status(200).render('appliance/listAppliance', {appliances,consumArr});
+    res.status(200).render('appliance/listAppliance', {appliances,consumArr,total});
   } catch (error) {
     console.log('hay error a la hora de mostrar los Electrodomésticos', error);
   }
