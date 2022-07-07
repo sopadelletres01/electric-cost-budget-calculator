@@ -4,8 +4,8 @@ class ApiService {
   static index() {
     return httpCnf.get('/all?zone=PCB');
   }
-  static show(resource, id) {
-    return httpCnf.get(`/${resource}/${id}`);
+  static min() {
+    return httpCnf.get('/min?zone=PCB');
   }
   static create(resource, data) {
     return httpCnf.post(`/${resource}`, data);
