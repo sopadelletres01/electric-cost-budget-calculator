@@ -1,5 +1,6 @@
 <h1>Login</h1>
 <form action='/auth/login' method='POST'>
+<input type="hidden" name="_csrf"value={{csrfToken}}>
   <label>
     Email
     <input type='email' name='email' />

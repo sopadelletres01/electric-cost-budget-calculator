@@ -1,0 +1,19 @@
+<div>
+
+    <form action="/auth/profile/edit" method="POST">
+        <input readonly type="hidden" name="_csrf" value={{csrfToken}} >
+
+        <label>Username</label>
+        <input  name="username" type="text" readonly  value={{infoUser.username}}  >
+        <label  >Nombre</label>
+        <input name="name" type="text"  value={{infoUser.name}}  >
+        <label>Apellidos</label>
+        <input  name="lastname" type="text"  value={{infoUser.lastname}} >
+        <label>email</label>
+        <input name="email" readonly type="email"  value={{infoUser.email}} >
+
+        <button type="submit">Actualizar</button>
+    </form>
+
+    <a href="/auth/profile/editPassword">Cambiar la contraseña</a>
+</div>    

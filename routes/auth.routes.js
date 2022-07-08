@@ -1,4 +1,9 @@
 const router = require('express').Router();
+const csrf = require('csurf');
+const validator = require('validator');
+
+const csrfProteccion = csrf({cookie:true})
+console.log(csrfProteccion)
 
 // ℹ️ Handles password encryption
 const mongoose = require('mongoose');
@@ -9,20 +14,60 @@ const User = require('../models/User.model');
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require('../middleware/isLoggedOut');
 const isLoggedIn = require('../middleware/isLoggedIn');
-const { signup, login, logout } = require('../controllers/auth');
+const { signup, login, logout,updatePassword } = require('../controllers/auth');
 
-router.get('/signup', isLoggedOut, (req, res) => {
-  res.render('auth/signup');
+router.get('/signup',[csrfProteccion, isLoggedOut], (req, res) => {
+  res.render('auth/signup',{ csrfToken: req.csrfToken() });
 });
 
-router.post('/signup', isLoggedOut, signup);
+router.post('/signup',[csrfProteccion, isLoggedOut], signup);
 
-router.get('/login', isLoggedOut, (req, res) => {
-  res.render('auth/login');
+router.get('/login',[csrfProteccion, isLoggedOut], (req, res) => {
+  res.render('auth/login',{ csrfToken: req.csrfToken() });
 });
 
-router.post('/login', isLoggedOut, login);
+router.post('/login',[csrfProteccion, isLoggedOut], login);
 
-router.get('/logout', isLoggedIn, logout);
+router.get('/logout',[csrfProteccion, isLoggedIn], logout);
 
+
+router.get('/profile', [csrfProteccion, isLoggedIn],async (req,res)=>{
+  try {
+    const userId = req.session.user._id
+    console.log('usuario IDDDD', userId)
+    const infoUser = await User.findById(userId);
+    console.log('INFO DEL USUARIO',infoUser)
+    res.render('auth/profile', { csrfToken: req.csrfToken(), infoUser })
+
+  } catch (error) { 
+    console.log('no funcionaaa y normal estoy dormida',error)
+  }
+});
+
+router.post('/profile/edit', [csrfProteccion, isLoggedIn], async (req, res) => {
+  try {
+    const userId = req.session.user._id
+    console.log('USUARIO ID',userId)
+    const infoUser = await User.findByIdAndUpdate(userId,  req.body , { new: true });
+    console.log('USUARIO ID',infoUser)
+    res.render('auth/profile', { csrfToken: req.csrfToken(), infoUser })
+
+  } catch (error) {
+    console.log('error al actualizar el usuario', error)
+  }
+})
+router.get('/profile/editPassword', [csrfProteccion, isLoggedIn], async (req, res) => {
+  try {
+    const userId = req.session.user._id
+    const infoUser=await User.findById(userId);
+    res.render('auth/profilePassword', { csrfToken: req.csrfToken(), infoUser })
+
+  } catch (error) {
+    console.log('error al actualizar el usuario', error)
+  }
+})
+
+router.post('/profile/editPassword', [csrfProteccion, isLoggedIn], updatePassword )
+ 
+ 
 module.exports = router;

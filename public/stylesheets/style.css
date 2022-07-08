@@ -6,14 +6,21 @@ h1 span {
   color: white;
 }
 
+h2 {
+  text-align: center;
+}
+
 /* public/stylesheets/style.css */
 body {
   padding: 50px;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url('../images/descarga.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
-  color: #00b7ff;
+  color: #070707;
   text-decoration: none;
   font-size: 1.5em;
 }
@@ -114,9 +121,21 @@ ul li {
 
 .navbar {
   display: flex;
+  justify-content: space-around;
   gap: 1rem;
   padding: 20px 10px;
-  background: rgba(175, 183, 184, 0.562);
+  background: rgba(250, 251, 251, 0.562);
+}
+
+.navItem{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navDiv{
+  display: flex;
+  gap: 24px
 }
 .navbar a:hover {
   opacity: 0.5;
@@ -136,10 +155,38 @@ table .actionBtn {
   width: fit-content;
   margin: 0;
 }
-table td, table th {
+table td,
+table th {
   text-align: center;
   padding: 8px;
 }
 table tr:nth-child(even) {
   background-color: #dddddd;
+}
+.icons{
+  width:60px;
+  height:60px;
+}
+
+.flexContainer{
+  margin-top: 200px;
+  text-align: center;
+  background-color: rgba(172, 172, 240, 0.637);
+  padding: 40px;
+}
+
+.anchor{
+  font-size: 2rem;
+  margin: 10px;
+  color: white;
+}
+.anchor:hover{
+  opacity: 0.5;
+}
+
+.h1Index{
+  font-size: 4rem;
+}
+.h2Index{
+  font-size:2rem;
 }

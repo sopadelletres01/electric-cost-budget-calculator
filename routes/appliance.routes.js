@@ -1,5 +1,7 @@
 const router = require('express').Router();
+const csrf = require('csurf');
 
+const csrfProteccion = csrf({cookie:true})
 const Appliance = require("../models/Appliance.model")
 const Consumption = require("../models/Consumption.model")
 
@@ -8,13 +10,14 @@ const {
   listAppliance,
   updateAppliance,
   findAllAppliances,
-  deleteAppliance
+  deleteAppliance,
+  updateApplianceCost
 
 } = require('../controllers/appliance');
 
 const { findConsumAndTypeS, findConsumAndTypeL, findApplinceS } = require('../controllers/consum');
 
-router.get('/create', async (req, res, next) => {
+router.get('/create',csrfProteccion, async (req, res, next) => {
   try {
     const consumTypeS = await findConsumAndTypeS();
     const consumTypeL = await findConsumAndTypeL();
@@ -25,7 +28,7 @@ router.get('/create', async (req, res, next) => {
     console.log('hay un error', error);
   }
 });
-router.post('/create', createAppliance);
+router.post('/create',csrfProteccion, createAppliance);
 
 router.get('/:id/update', async (req,res)=>{
   const appliance = await Appliance.findById(req.params.id).populate("type consum")
@@ -35,14 +38,16 @@ router.get('/:id/update', async (req,res)=>{
 });
 
 
-router.post('/:id/update', updateAppliance);
+router.post('/:id/update', csrfProteccion,updateAppliance);
+
+router.post('/:id/updateCost', updateApplianceCost);
 
 router.get('/list', listAppliance);
 
-router.post('/:id/delete', deleteAppliance);
+router.post('/:id/delete',csrfProteccion, deleteAppliance);
 
 
-router.get('/budget', async (req, res, next) => { 
+router.get('/budget',csrfProteccion, async (req, res, next) => { 
   try {
     const userId = req.session;
     console.log(userId)

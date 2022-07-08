@@ -1,6 +1,9 @@
 // We reuse this import in order to have access to the `body` property in requests
 const express = require('express');
 
+
+
+
 // ℹ️ Responsible for the messages you see in the terminal as requests are coming in
 // https://www.npmjs.com/package/morgan
 const logger = require('morgan');
@@ -48,6 +51,7 @@ module.exports = app => {
   // Handles access to the favicon
   app.use(favicon(path.join(__dirname, '..', 'public', 'images', 'favicon.ico')));
 
+  require("../utils/setupCron")()
   // ℹ️ Middleware that adds a "req.session" information and later to check that you are who you say you are 😅
   app.use(
     session({

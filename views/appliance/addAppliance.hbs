@@ -1,6 +1,8 @@
 <h1>Crear Electrodoméstico</h1>
 <h2>Larga Duracion</h2>
 <form action='/appliance/create' method='POST'>
+  <input type="hidden" name="_csrf" value={{csrfToken}}>
+
   <input type="hidden" name="longDuration" value="true">
   <label for='typeAppliance'> Tipo de Electrodoméstico</label>
   <select name='type'>
@@ -16,6 +18,8 @@
       <option value={{this._id}}>{{this.name}}</option>
     {{/each}}
   </select>
+  <label for="">Nombre personalizado:</label>
+  <input type="text" name="name">
   <button type='submit'> Crear</button>
   <button type='reset'>Borrar Datos</button>
 
@@ -34,6 +38,7 @@
       <option value={{this._id}}>{{this.name}}</option>
     {{/each}}
   </select>
+
   <label for='typeConsum'>Categoria energetica</label>
   <select name='consum'>
     {{! MOSTRAREMOS LOS TIPOS QUE HAY DE LARGA DURACION. }}
@@ -41,6 +46,8 @@
       <option value={{this._id}}>{{this.name}}</option>
     {{/each}}
   </select>
+  <label for="">Nombre personalizado:</label>
+  <input type="text" name="name">
   <button type='submit'> Crear</button>
   <button type='reset'>Borrar Datos</button>
 
