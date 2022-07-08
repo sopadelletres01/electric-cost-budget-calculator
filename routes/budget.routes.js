@@ -18,14 +18,14 @@ router.get('/', csrfProteccion,async (req, res, next) => {
     const myAppliances = await findApplianceS(userId);
     const hours = await findHours();
     console.log(myAppliances, hours);
-    res.render('budget/createBudget', { myAppliances, hours });
+    res.render('budget/createBudget', { csrfToken: req.csrfToken(), myAppliances, hours });
   } catch (error) {
     console.log('error la consultar las horas.', error);
   }
 });
 //1r post
 
-router.post('/create', async (req, res, next) => {
+router.post('/create', csrfProteccion, async (req, res, next) => {
   const {
     data: { hour: minHour, price: minPrice },
   } = await ApiService.min();

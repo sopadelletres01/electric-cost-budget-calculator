@@ -4,7 +4,6 @@ const csrf = require('csurf');
 const csrfProteccion = csrf({cookie:true})
 const Appliance = require("../models/Appliance.model")
 const Consumption = require("../models/Consumption.model")
-
 const {
   createAppliance,
   listAppliance,
@@ -23,12 +22,12 @@ router.get('/create',csrfProteccion, async (req, res, next) => {
     const consumTypeL = await findConsumAndTypeL();
       
      // console.log('consumo y tipo',consumTypeS);
-    res.render('appliance/addAppliance', { consumTypeS, consumTypeL });
+    res.render('appliance/addAppliance', { csrfToken: req.csrfToken(), consumTypeS, consumTypeL });
   } catch (error) {
     console.log('hay un error', error);
   }
 });
-router.post('/create',csrfProteccion, createAppliance);
+router.post('/create', createAppliance);
 
 router.get('/:id/update', async (req,res)=>{
   const appliance = await Appliance.findById(req.params.id).populate("type consum")
@@ -38,13 +37,13 @@ router.get('/:id/update', async (req,res)=>{
 });
 
 
-router.post('/:id/update', csrfProteccion,updateAppliance);
+router.post('/:id/update',updateAppliance);
 
 router.post('/:id/updateCost', updateApplianceCost);
 
 router.get('/list', listAppliance);
 
-router.post('/:id/delete',csrfProteccion, deleteAppliance);
+router.post('/:id/delete', deleteAppliance);
 
 
 router.get('/budget',csrfProteccion, async (req, res, next) => { 

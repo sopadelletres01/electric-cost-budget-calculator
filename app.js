@@ -34,11 +34,12 @@ app.use('/', index);
 const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes);
 
+const isLoggedIn = require('./middleware/isLoggedIn');
 const applianceRoutes = require('./routes/appliance.routes');
-app.use('/appliance', applianceRoutes);
+app.use('/appliance', isLoggedIn,  applianceRoutes);
 
 const budgetRoutes = require('./routes/budget.routes');
-app.use('/budget', budgetRoutes);
+app.use('/budget', isLoggedIn, budgetRoutes);
 
 const priceRoutes = require('./routes/externalAPI/index');
 app.use('/price', priceRoutes);

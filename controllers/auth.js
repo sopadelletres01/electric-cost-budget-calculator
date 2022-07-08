@@ -3,6 +3,8 @@ const valiPass=require('password-validator')
 const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const csrf = require('csurf');
+const csrfProteccion = csrf({cookie:true})
 // How many rounds should bcrypt run the salt (default [10 - 12 rounds])
 const saltRounds = 10;
 exports.signup = async (req, res, next) => {
@@ -74,6 +76,7 @@ exports.signup = async (req, res, next) => {
         }
         if (error.code === 11000) {
           return res.status(400).render('auth/signup', {
+             csrfToken: req.csrfToken() ,
             errorMessage: 'Username need to be unique. The username you chose is already in use.',
           });
         }
@@ -95,6 +98,7 @@ exports.login = async (req, res, next) => {
   // - either length based parameters or we check the strength of a password
   if (!validator.isStrongPassword(password)) {
     return res.status(400).render('auth/login', {
+      csrfToken: req.csrfToken(),
       errorMessage: 'Your password needs to be at least 8 characters long.',
     });
   }
@@ -105,6 +109,7 @@ exports.login = async (req, res, next) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {
         return res.status(400).render('auth/login', {
+          csrfToken: req.csrfToken(),
           errorMessage: 'Wrong credentials.',
         });
       }
@@ -113,6 +118,7 @@ exports.login = async (req, res, next) => {
       bcrypt.compare(password, user.password).then(isSamePassword => {
         if (!isSamePassword) {
           return res.status(400).render('auth/login', {
+             csrfToken: req.csrfToken() ,
             errorMessage: 'Wrong credentials.',
           });
         }

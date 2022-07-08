@@ -29,6 +29,7 @@
 <br>
 <h2>Corta Duracion</h2>
 <form action='/appliance/create' method='POST'>
+  <input type="hidden" name="_csrf" value={{csrfToken}}>
   <input type="hidden" name="longDuration" value="false">
 
   <label for='typeAppliance'> Tipo de Electrodoméstico</label>

@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const csrf = require('csurf');
 const validator = require('validator');
 
+const csrf = require('csurf');
 const csrfProteccion = csrf({cookie:true})
 console.log(csrfProteccion)
 
