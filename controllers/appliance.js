@@ -25,9 +25,9 @@ exports.listAppliance = async (req, res, next) => {
     appliances.forEach(a=>{
       total+=a.totalCost
     })
-    console.log("total",total)
+    console.log("total",total.toFixed(2))
     const consumArr = await Consumption.find({})
-    res.status(200).render('appliance/listAppliance', {appliances,consumArr,total});
+    res.status(200).render('appliance/listAppliance', {appliances,consumArr,total:total.toFixed(2)});
   } catch (error) {
     console.log('hay error a la hora de mostrar los Electrodomésticos', error);
   }
